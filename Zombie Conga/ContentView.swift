@@ -29,8 +29,7 @@ struct ContentView: View {
 }
 
 
-final class LevelOne: SKScene {
-  let zombie = SKSpriteNode(imageNamed: "zombie1")
+final class LevelOne: BaseLevel {
   let cameraNode = SKCameraNode()
   
   override func didMove(to view: SKView) {
@@ -47,31 +46,6 @@ final class LevelOne: SKScene {
   
   override func update(_ currentTime: TimeInterval) {
     updateCameraMovement()
-  }
-  
-  func setupZombie() {
-    zombie.position = CGPoint(x: 100, y: UIScreen.main.bounds.height / 2)
-    zombie.size = CGSize(width: 70, height: 70)
-    addChild(zombie)
-  }
-  
-  func moveZombie(location: CGPoint) {
-    let zombieX: CGFloat = zombie.position.x
-    let zombieY: CGFloat = zombie.position.y
-    
-    let offset: CGPoint = CGPointMake(location.x - zombieX, location.y - zombieY)
-    let distance: CGFloat = sqrt(offset.x * offset.x + offset.y * offset.y)
-    let speed: CGFloat = 300.0
-    let duration: CGFloat = distance / speed
-    let direction: CGPoint = CGPoint(x: offset.x / distance, y: offset.y / distance)
-    let angle: CGFloat = atan2(direction.y, direction.x)
-    
-    let move = SKAction.move(to: location, duration: duration)
-    let rotate = SKAction.rotate(toAngle: angle, duration: 0.2, shortestUnitArc: true)
-    
-    zombie.removeAllActions()
-    zombie.run(rotate)
-    zombie.run(move)
   }
   
   func setupCamera() {
