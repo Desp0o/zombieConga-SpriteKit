@@ -38,10 +38,40 @@ final class LevelOne: SKScene {
     setupCamera()
   }
   
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    guard let touch = touches.first else { return }
+    let location = touch.location(in: self)
+    
+    moveZombie(location: location)
+  }
+  
+  override func update(_ currentTime: TimeInterval) {
+    updateCameraMovement()
+  }
+  
   func setupZombie() {
     zombie.position = CGPoint(x: 100, y: UIScreen.main.bounds.height / 2)
     zombie.size = CGSize(width: 70, height: 70)
     addChild(zombie)
+  }
+  
+  func moveZombie(location: CGPoint) {
+    let zombieX: CGFloat = zombie.position.x
+    let zombieY: CGFloat = zombie.position.y
+    
+    let offset: CGPoint = CGPointMake(location.x - zombieX, location.y - zombieY)
+    let distance: CGFloat = sqrt(offset.x * offset.x + offset.y * offset.y)
+    let speed: CGFloat = 300.0
+    let duration: CGFloat = distance / speed
+    let direction: CGPoint = CGPoint(x: offset.x / distance, y: offset.y / distance)
+    let angle: CGFloat = atan2(direction.y, direction.x)
+    
+    let move = SKAction.move(to: location, duration: duration)
+    let rotate = SKAction.rotate(toAngle: angle, duration: 0.2, shortestUnitArc: true)
+    
+    zombie.removeAllActions()
+    zombie.run(rotate)
+    zombie.run(move)
   }
   
   func setupCamera() {
@@ -49,15 +79,7 @@ final class LevelOne: SKScene {
     addChild(cameraNode)
   }
   
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    guard let touch = touches.first else { return }
-    let location = touch.location(in: self)
-    
-    let move = SKAction.move(to: location, duration: 1)
-    zombie.run(move)
-  }
-  
-  override func update(_ currentTime: TimeInterval) {
+  func updateCameraMovement() {
     let minX = size.width / 2
     let maxX = 3 * size.width - size.width / 2
     
