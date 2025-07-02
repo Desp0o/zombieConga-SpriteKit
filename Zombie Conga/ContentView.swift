@@ -41,7 +41,7 @@ final class LevelOne: BaseLevel {
     guard let touch = touches.first else { return }
     let location = touch.location(in: self)
     
-    moveZombie(location: location)
+    zombie.moveZombie(location: location)
   }
   
   override func update(_ currentTime: TimeInterval) {

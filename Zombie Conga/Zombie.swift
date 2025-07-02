@@ -1,0 +1,65 @@
+//
+//  Zombie.swift
+//  Zombie Conga
+//
+//  Created by Tornike Despotashvili on 7/2/25.
+//
+
+import SpriteKit
+
+class Zombie: SKSpriteNode {
+  let walkTextures: [SKTexture] = [
+    SKTexture(imageNamed: "zombie1"),
+    SKTexture(imageNamed: "zombie2"),
+    SKTexture(imageNamed: "zombie3"),
+    SKTexture(imageNamed: "zombie4")
+  ]
+  
+  init() {
+    let texture = SKTexture(imageNamed: "zombie1")
+    super.init(texture: texture, color: .clear, size: CGSize(width: 70, height: 70))
+    self.name = "zombie"
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  func moveZombie(location: CGPoint) {
+    let zombieX: CGFloat = self.position.x
+    let zombieY: CGFloat = self.position.y
+    
+    let offset: CGPoint = CGPointMake(location.x - zombieX, location.y - zombieY)
+    let distance: CGFloat = sqrt(offset.x * offset.x + offset.y * offset.y)
+    let speed: CGFloat = 300.0
+    let duration: CGFloat = distance / speed
+    let direction: CGPoint = CGPoint(x: offset.x / distance, y: offset.y / distance)
+    let angle: CGFloat = atan2(direction.y, direction.x)
+    
+    let move = SKAction.move(to: location, duration: duration)
+    let rotate = SKAction.rotate(toAngle: angle, duration: 0.2, shortestUnitArc: true)
+    let stopAnimation = SKAction.run { [weak self] in
+      self?.removeAction(forKey: "zombieWalk")
+    }
+    
+    self.removeAllActions()
+    animateZombieWalk()
+    self.run(rotate)
+    self.run(SKAction.sequence([move, stopAnimation]))
+    
+  }
+  
+  func animateZombieWalk() {
+    let textures: [SKTexture] = [
+      SKTexture(imageNamed: "zombie1"),
+      SKTexture(imageNamed: "zombie2"),
+      SKTexture(imageNamed: "zombie3"),
+      SKTexture(imageNamed: "zombie4")
+    ]
+    
+    let animation = SKAction.animate(with: textures, timePerFrame: 0.1)
+    let repeatAnimation = SKAction.repeatForever(animation)
+    
+    self.run(repeatAnimation, withKey: "zombieWalk")
+  }
+}
