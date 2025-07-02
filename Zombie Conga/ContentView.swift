@@ -60,22 +60,8 @@ final class LevelOne: BaseLevel {
     (bodyA.categoryBitMask == CategoryBitmask.enemy && bodyB.categoryBitMask == CategoryBitmask.player)
     
     if collision {
+      hittedByEnemy()
       print("✅")
-    }
-  }
-  
-  func didEnd(_ contact: SKPhysicsContact) {
-    let bodyA = contact.bodyA
-    let bodyB = contact.bodyB
-    
-    let collision =
-    (bodyA.categoryBitMask == CategoryBitmask.player && bodyB.categoryBitMask == CategoryBitmask.enemy) ||
-    (bodyA.categoryBitMask == CategoryBitmask.enemy && bodyB.categoryBitMask == CategoryBitmask.player)
-    
-    if !collision {
-      zombie.physicsBody?.isDynamic = true
-      enemy.physicsBody?.isDynamic = true
-      print("2, 📸")
     }
   }
   
@@ -106,8 +92,30 @@ final class LevelOne: BaseLevel {
     enemy.physicsBody?.categoryBitMask = CategoryBitmask.enemy
     enemy.physicsBody?.collisionBitMask = CategoryBitmask.player
     enemy.physicsBody?.contactTestBitMask = CategoryBitmask.player
+    enemy.physicsBody?.mass = 10.0
     
     addChild(enemy)
+  }
+  
+  func hittedByEnemy() {
+    zombie.physicsBody?.categoryBitMask = 0
+    zombie.physicsBody?.contactTestBitMask = 0
+    zombie.physicsBody?.usesPreciseCollisionDetection = false
+    zombie.physicsBody?.collisionBitMask = 0
+    
+    let restore = SKAction.run {[weak self] in
+      self?.zombie.physicsBody?.usesPreciseCollisionDetection = true
+      self?.zombie.physicsBody?.categoryBitMask = CategoryBitmask.player
+      self?.zombie.physicsBody?.collisionBitMask = CategoryBitmask.enemy
+      self?.zombie.physicsBody?.contactTestBitMask = CategoryBitmask.enemy
+    }
+    
+    let fadeOut = SKAction.fadeOut(withDuration: 0.1)
+    let fadeIn = SKAction.fadeIn(withDuration: 0.1)
+    let blink = SKAction.sequence([fadeOut, fadeIn])
+    let repeatBlinking = SKAction.repeat(blink, count: 6)
+    
+    zombie.run(SKAction.sequence([repeatBlinking, restore]))
   }
 }
 
