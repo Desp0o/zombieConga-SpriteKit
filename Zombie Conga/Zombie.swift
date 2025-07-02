@@ -17,8 +17,17 @@ class Zombie: SKSpriteNode {
   
   init() {
     let texture = SKTexture(imageNamed: "zombie1")
-    super.init(texture: texture, color: .clear, size: CGSize(width: 70, height: 70))
+    super.init(texture: texture, color: .clear, size: texture.size())
+    
+    self.setScale(0.3)
     self.name = "zombie"
+    self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
+    self.physicsBody?.isDynamic = true
+    self.physicsBody?.affectedByGravity = false
+    self.physicsBody?.usesPreciseCollisionDetection = true
+    self.physicsBody?.categoryBitMask = CategoryBitmask.player
+    self.physicsBody?.collisionBitMask = CategoryBitmask.enemy
+    self.physicsBody?.contactTestBitMask = CategoryBitmask.enemy
   }
   
   required init?(coder aDecoder: NSCoder) {

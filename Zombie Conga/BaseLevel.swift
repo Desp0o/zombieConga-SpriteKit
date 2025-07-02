@@ -7,8 +7,12 @@
 
 import SpriteKit
 
-class BaseLevel: SKScene {
+class BaseLevel: SKScene, SKPhysicsContactDelegate {
   let zombie = Zombie()
+  
+  override func didMove(to view: SKView) {
+    self.physicsWorld.contactDelegate = self
+  }
 
   func setupSettingsButton() {
     let settingsButton = SKSpriteNode(imageNamed: "settingsButton")
@@ -21,7 +25,6 @@ class BaseLevel: SKScene {
   
   func setupZombie() {
     zombie.position = CGPoint(x: 100, y: UIScreen.main.bounds.height / 2)
-    zombie.size = CGSize(width: 70, height: 70)
     addChild(zombie)
   }
 }
