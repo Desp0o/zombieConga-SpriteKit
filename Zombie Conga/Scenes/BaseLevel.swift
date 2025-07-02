@@ -8,8 +8,6 @@
 import SpriteKit
 
 class BaseLevel: SKScene, SKPhysicsContactDelegate {
-  let zombie = Zombie()
-  
   override func didMove(to view: SKView) {
     self.physicsWorld.contactDelegate = self
   }
@@ -21,11 +19,6 @@ class BaseLevel: SKScene, SKPhysicsContactDelegate {
     settingsButton.position = CGPoint(x: size.width - 60, y: size.height - 40)
     
     addChild(settingsButton)
-  }
-  
-  func setupZombie() {
-    zombie.position = CGPoint(x: 100, y: UIScreen.main.bounds.height / 2)
-    addChild(zombie)
   }
 }
 

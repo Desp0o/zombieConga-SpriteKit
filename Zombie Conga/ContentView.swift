@@ -30,8 +30,9 @@ struct ContentView: View {
 
 
 final class LevelOne: BaseLevel {
-  let cameraNode = SKCameraNode()
-  let enemy = Enemy()
+  let cameraNode: SKCameraNode = SKCameraNode()
+  let zombie: Zombie = Zombie()
+  let enemy: Enemy = Enemy()
   
   override func didMove(to view: SKView) {
     super.didMove(to: view)
@@ -62,6 +63,11 @@ final class LevelOne: BaseLevel {
     if collision {
       hittedByEnemy()
     }
+  }
+  
+  func setupZombie() {
+    zombie.position = CGPoint(x: 100, y: UIScreen.main.bounds.height / 2)
+    addChild(zombie)
   }
   
   func setupEnemy() {
@@ -106,10 +112,5 @@ final class LevelOne: BaseLevel {
   }
 }
 
-
-struct CategoryBitmask {
-  static let player: UInt32 = 1
-  static let enemy: UInt32 = 2
-}
 
 
