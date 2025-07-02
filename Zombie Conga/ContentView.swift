@@ -29,3 +29,8 @@ struct ContentView: View {
 }
 
 
+final class LevelOne: SKScene {
+  override func didMove(to view: SKView) {
+    
+  }
+}

@@ -7,8 +7,4 @@
 
 import SpriteKit
 
-final class LevelOne: SKScene {
-  override func didMove(to view: SKView) {
-    
-  }
-}
+

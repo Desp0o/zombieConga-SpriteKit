@@ -7,18 +7,7 @@
 
 import SpriteKit
 
-class BaseLevel: SKScene {
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    guard let touch = touches.first else { return }
-    let location = touch.location(in: self)
-    let nodeTouch = atPoint(location)
-    
-    if nodeTouch.name == "settingsButton" {
-      let level = GameManager.loadLevel(lvl: 1)
-      view?.presentScene(level, transition: .crossFade(withDuration: 1))
-    }
-  }
-  
+class BaseLevel: SKScene {  
   func setupSettingsButton() {
     let settingsButton = SKSpriteNode(imageNamed: "settingsButton")
     settingsButton.name = "settingsButton"

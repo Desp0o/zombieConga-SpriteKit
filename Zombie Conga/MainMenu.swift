@@ -42,7 +42,7 @@ final class MainMenu: BaseLevel {
     
     if nodeTouch.name == "settingsButton" {
       let level = GameManager.loadLevel(lvl: 1)
-      view?.presentScene(level, transition: .crossFade(withDuration: 1))
+      view?.presentScene(level, transition: .crossFade(withDuration: 0.5))
     }
     
     if nodeTouch.name == "playButton" {
