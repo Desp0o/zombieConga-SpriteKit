@@ -10,20 +10,22 @@ import SpriteKit
 
 struct ContentView: View {
   var scene: SKScene {
-    let scene = GameManager.loadLevel(lvl: 1)
+    let scene = GameManager.loadLevel(lvl: 0)
     scene.size = UIScreen.main.bounds.size
-    
+    scene.scaleMode = .fill
     return scene
   }
   
-    var body: some View {
-      ZStack {
-        SpriteView(scene: scene)
-          .ignoresSafeArea()
-      }
+  var body: some View {
+    ZStack {
+      SpriteView(scene: scene)
+        .ignoresSafeArea()
     }
+  }
 }
 
 #Preview {
-    ContentView()
+  ContentView()
 }
+
+

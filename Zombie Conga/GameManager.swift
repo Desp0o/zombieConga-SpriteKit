@@ -10,6 +10,8 @@ import SpriteKit
 final class GameManager {
   static func loadLevel(lvl: Int) -> SKScene {
     switch lvl {
+    case 0:
+      return MainMenu()
     case 1:
       return LevelOne()
     default:
@@ -17,5 +19,3 @@ final class GameManager {
     }
   }
 }
-
-
