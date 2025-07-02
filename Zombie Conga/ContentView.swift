@@ -31,7 +31,7 @@ struct ContentView: View {
 
 final class LevelOne: BaseLevel {
   let cameraNode = SKCameraNode()
-  let enemy = SKSpriteNode(imageNamed: "enemy")
+  let enemy = Enemy()
   
   override func didMove(to view: SKView) {
     super.didMove(to: view)
@@ -61,8 +61,12 @@ final class LevelOne: BaseLevel {
     
     if collision {
       hittedByEnemy()
-      print("✅")
     }
+  }
+  
+  func setupEnemy() {
+    enemy.position = CGPoint(x: size.width / 2, y: size.height / 2)
+    addChild(enemy)
   }
   
   func setupCamera() {
@@ -78,23 +82,6 @@ final class LevelOne: BaseLevel {
     let clampedY = UIScreen.main.bounds.height / 2
     
     cameraNode.position = CGPoint(x: clampedX, y: clampedY)
-  }
-  
-  func setupEnemy() {
-    
-    enemy.name = "enemy"
-    enemy.position = CGPoint(x: size.width / 2, y: size.height / 2)
-    enemy.setScale(0.3)
-    enemy.physicsBody = SKPhysicsBody(rectangleOf: enemy.size)
-    enemy.physicsBody?.isDynamic = true
-    enemy.physicsBody?.affectedByGravity = false
-    enemy.physicsBody?.usesPreciseCollisionDetection = true
-    enemy.physicsBody?.categoryBitMask = CategoryBitmask.enemy
-    enemy.physicsBody?.collisionBitMask = CategoryBitmask.player
-    enemy.physicsBody?.contactTestBitMask = CategoryBitmask.player
-    enemy.physicsBody?.mass = 10.0
-    
-    addChild(enemy)
   }
   
   func hittedByEnemy() {
@@ -124,3 +111,5 @@ struct CategoryBitmask {
   static let player: UInt32 = 1
   static let enemy: UInt32 = 2
 }
+
+
