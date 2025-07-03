@@ -53,10 +53,10 @@ class Zombie: SKSpriteNode {
       self?.removeAction(forKey: "zombieWalk")
     }
     
-    self.removeAllActions()
+    self.removeAction(forKey: "zombieMoveAction")
     animateZombieWalk()
     self.run(rotate)
-    self.run(SKAction.sequence([move, stopAnimation]))
+    self.run(SKAction.sequence([move, stopAnimation]), withKey: "zombieMoveAction")
     
   }
   
