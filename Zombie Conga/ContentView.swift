@@ -33,12 +33,14 @@ final class LevelOne: BaseLevel {
   let cameraNode: SKCameraNode = SKCameraNode()
   let zombie: Zombie = Zombie()
   let enemy: Enemy = Enemy()
+  let cat: Cat = Cat()
   
   override func didMove(to view: SKView) {
     super.didMove(to: view)
     setupZombie()
     setupCamera()
     setupEnemy()
+    spawnCats()
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -66,7 +68,7 @@ final class LevelOne: BaseLevel {
   }
   
   func setupZombie() {
-    zombie.position = CGPoint(x: 100, y: UIScreen.main.bounds.height / 2)
+    zombie.position = CGPoint(x: 400, y: UIScreen.main.bounds.height / 2)
     addChild(zombie)
   }
   
@@ -124,6 +126,23 @@ final class LevelOne: BaseLevel {
     let repeatBlinking = SKAction.repeat(blink, count: 6)
     
     zombie.run(SKAction.sequence([repeatBlinking, restore]))
+  }
+  
+  func generateCats() {
+    let cat = Cat()
+    cat.generateCatPosition(around: zombie)
+    addChild(cat)
+  }
+  
+  func spawnCats() {
+    let spawn = SKAction.run { [weak self] in
+      self?.generateCats()
+    }
+    
+    let wait = SKAction.wait(forDuration: 4)
+    let repeatForever = SKAction.repeatForever(SKAction.sequence([spawn, wait]))
+    
+    self.run(repeatForever)
   }
 }
 

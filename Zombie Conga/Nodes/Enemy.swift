@@ -34,6 +34,6 @@ final class Enemy: SKSpriteNode {
     let posX: CGFloat = sprite.position.x + (UIScreen.main.bounds.maxX + self.frame.width)
     let posY: CGFloat = CGFloat.random(in: (self.frame.height / 2)...(UIScreen.main.bounds.maxY - self.frame.height / 2))
     
-    self.position = CGPointMake(posX, posY)
+    self.position = CGPoint(x: posX, y: posY)
   }
 }

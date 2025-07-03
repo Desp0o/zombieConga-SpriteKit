@@ -40,7 +40,7 @@ class Zombie: SKSpriteNode {
     let zombieX: CGFloat = self.position.x
     let zombieY: CGFloat = self.position.y
     
-    let offset: CGPoint = CGPointMake(location.x - zombieX, location.y - zombieY)
+    let offset: CGPoint = CGPoint(x: location.x - zombieX, y: location.y - zombieY)
     let distance: CGFloat = sqrt(offset.x * offset.x + offset.y * offset.y)
     let speed: CGFloat = 300.0
     let duration: CGFloat = distance / speed

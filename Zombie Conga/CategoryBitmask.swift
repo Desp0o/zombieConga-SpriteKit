@@ -8,4 +8,5 @@
 struct CategoryBitmask {
   static let player: UInt32 = 1
   static let enemy: UInt32 = 2
+  static let cat: UInt32 = 4
 }
