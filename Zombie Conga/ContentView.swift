@@ -70,17 +70,20 @@ final class LevelOne: BaseLevel {
     addChild(zombie)
   }
   
-  func setupEnemy() {    
+  func setupEnemy() {
+    
     let spawn = SKAction.run {[weak self] in
       guard let zombie = self?.zombie else { return }
       self?.enemy.generateEnemyPosition(sprite: zombie)
+      
+      guard let enemy = self?.enemy else { return }
+      let move = SKAction.move(to: CGPoint(x: -600, y: enemy.position.y) , duration: 4)
+      enemy.run(move)
     }
     
     let remove = SKAction.removeFromParent()
-    let wait = SKAction.wait(forDuration: 3)
-    
+    let wait = SKAction.wait(forDuration: 5)
     let sequence = SKAction.sequence([spawn, remove, wait])
-    
     let repeatForever = SKAction.repeatForever(sequence)
     
     self.run(repeatForever)
