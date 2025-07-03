@@ -72,6 +72,19 @@ final class LevelOne: BaseLevel {
   
   func setupEnemy() {
     enemy.generateEnemyPosition()
+    
+    let spawn = SKAction.run {[weak self] in
+      self?.enemy.generateEnemyPosition()
+    }
+    
+    let remove = SKAction.removeFromParent()
+    let wait = SKAction.wait(forDuration: 3)
+    
+    let sequence = SKAction.sequence([spawn, remove, wait])
+    
+    let repeatForever = SKAction.repeatForever(sequence)
+    
+    self.run(repeatForever)
     addChild(enemy)
   }
   
