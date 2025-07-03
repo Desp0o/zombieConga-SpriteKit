@@ -30,8 +30,8 @@ final class Enemy: SKSpriteNode {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func generateEnemyPosition() {
-    let posX: CGFloat = UIScreen.main.bounds.maxX + self.frame.width
+  func generateEnemyPosition(sprite: SKSpriteNode) {
+    let posX: CGFloat = sprite.position.x + (UIScreen.main.bounds.maxX + self.frame.width)
     let posY: CGFloat = CGFloat.random(in: (self.frame.height / 2)...(UIScreen.main.bounds.maxY - self.frame.height / 2))
     
     self.position = CGPointMake(posX, posY)

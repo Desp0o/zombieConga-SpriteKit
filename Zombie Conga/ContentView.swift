@@ -70,11 +70,10 @@ final class LevelOne: BaseLevel {
     addChild(zombie)
   }
   
-  func setupEnemy() {
-    enemy.generateEnemyPosition()
-    
+  func setupEnemy() {    
     let spawn = SKAction.run {[weak self] in
-      self?.enemy.generateEnemyPosition()
+      guard let zombie = self?.zombie else { return }
+      self?.enemy.generateEnemyPosition(sprite: zombie)
     }
     
     let remove = SKAction.removeFromParent()
