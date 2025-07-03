@@ -71,7 +71,7 @@ final class LevelOne: BaseLevel {
   }
   
   func setupEnemy() {
-    enemy.position = CGPoint(x: size.width / 2, y: size.height / 2)
+    enemy.generateEnemyPosition()
     addChild(enemy)
   }
   
