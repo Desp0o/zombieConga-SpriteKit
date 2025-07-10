@@ -33,32 +33,28 @@ final class Cat: SKSpriteNode {
     self.setScale(0.3)
   }
   
-  func generateCatPosition(around sprite: SKSpriteNode) {
-    let distanceX = CGFloat.random(in: 100...600)
-    let distanceY = CGFloat.random(in: 100...200)
-    
-    let randomBoolX: CGFloat = Bool.random() ? 1 : -1
-    let randomBoolY: CGFloat = Bool.random() ? 1 : -1
-    
-    var calculatedX = CGFloat((sprite.position.x + distanceX) * randomBoolX)
-    var calculatedY = CGFloat((sprite.position.y + distanceY) * randomBoolY)
-    
-    if calculatedX > UIScreen.main.bounds.maxX {
-      calculatedX = UIScreen.main.bounds.width
-    }
-    
-    if calculatedX < UIScreen.main.bounds.minX {
-      calculatedX = 30
-    }
-    
-    if calculatedY > UIScreen.main.bounds.maxY {
-      calculatedY = UIScreen.main.bounds.height
-    }
-    
-    if calculatedY < UIScreen.main.bounds.minY {
-      calculatedY = 30
-    }
-    
-    self.position = CGPoint(x: calculatedX, y: calculatedY)
-  }
-}
+  func generateCatPosition(around sprite: SKSpriteNode, scene: SKScene) {
+      guard let camera = scene.camera else { return }
+
+      let distanceX = CGFloat.random(in: 100...600)
+      let distanceY = CGFloat.random(in: 100...200)
+      
+      let randomBoolX: CGFloat = Bool.random() ? 1 : -1
+      let randomBoolY: CGFloat = Bool.random() ? 1 : -1
+      
+      var calculatedX = camera.position.x + distanceX * randomBoolX
+      var calculatedY = camera.position.y + distanceY * randomBoolY
+
+      let screenWidth = scene.size.width
+      let screenHeight = scene.size.height
+      
+      let minX = camera.position.x - screenWidth / 2 + 30
+      let maxX = camera.position.x + screenWidth / 2 - 30
+      let minY = camera.position.y - screenHeight / 2 + 30
+      let maxY = camera.position.y + screenHeight / 2 - 30
+
+      calculatedX = min(max(calculatedX, minX), maxX)
+      calculatedY = min(max(calculatedY, minY), maxY)
+
+      self.position = CGPoint(x: calculatedX, y: calculatedY)
+  }}

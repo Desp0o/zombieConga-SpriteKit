@@ -130,7 +130,8 @@ final class LevelOne: BaseLevel {
   
   func generateCats() {
     let cat = Cat()
-    cat.generateCatPosition(around: zombie)
+    guard let scene = scene else { return }
+    cat.generateCatPosition(around: zombie, scene: scene)
     addChild(cat)
   }
   
