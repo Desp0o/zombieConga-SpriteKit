@@ -34,18 +34,31 @@ final class Cat: SKSpriteNode {
   }
   
   func generateCatPosition(around sprite: SKSpriteNode) {
-    let distanceX = CGFloat.random(in: 100...UIScreen.main.bounds.maxX - self.frame.width / 2)
-    let distanceY = CGFloat.random(in: 100...UIScreen.main.bounds.maxY - self.frame.height / 2)
+    let distanceX = CGFloat.random(in: 100...600)
+    let distanceY = CGFloat.random(in: 100...200)
     
-    let positiveX = max(min(sprite.position.x + distanceX, UIScreen.main.bounds.maxX), UIScreen.main.bounds.minX)
-    let positiveY = max(min(sprite.position.y + distanceY, UIScreen.main.bounds.maxY), UIScreen.main.bounds.minY)
+    let randomBoolX: CGFloat = Bool.random() ? 1 : -1
+    let randomBoolY: CGFloat = Bool.random() ? 1 : -1
     
-    let negativeX = max(min(sprite.position.x - distanceX, UIScreen.main.bounds.maxX), UIScreen.main.bounds.minX)
-    let negativeY = max(min(sprite.position.y - distanceY, UIScreen.main.bounds.maxY), UIScreen.main.bounds.minY)
+    var calculatedX = CGFloat((sprite.position.x + distanceX) * randomBoolX)
+    var calculatedY = CGFloat((sprite.position.y + distanceY) * randomBoolY)
     
-    let randomX = CGFloat.random(in: negativeX...positiveX)
-    let randomY = CGFloat.random(in: negativeY...positiveY)
+    if calculatedX > UIScreen.main.bounds.maxX {
+      calculatedX = UIScreen.main.bounds.width
+    }
     
-    self.position = CGPoint(x: randomX, y: randomY)
+    if calculatedX < UIScreen.main.bounds.minX {
+      calculatedX = 30
+    }
+    
+    if calculatedY > UIScreen.main.bounds.maxY {
+      calculatedY = UIScreen.main.bounds.height
+    }
+    
+    if calculatedY < UIScreen.main.bounds.minY {
+      calculatedY = 30
+    }
+    
+    self.position = CGPoint(x: calculatedX, y: calculatedY)
   }
 }
