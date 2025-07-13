@@ -8,6 +8,8 @@
 import SpriteKit
 
 class Zombie: SKSpriteNode {
+  var takenCatsCount: Int = 0
+  
   let walkTextures: [SKTexture] = [
     SKTexture(imageNamed: "zombie1"),
     SKTexture(imageNamed: "zombie2"),

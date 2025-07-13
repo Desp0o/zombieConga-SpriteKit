@@ -33,7 +33,6 @@ final class LevelOne: BaseLevel {
   let cameraNode: SKCameraNode = SKCameraNode()
   let zombie: Zombie = Zombie()
   let enemy: Enemy = Enemy()
-  let cat: Cat = Cat()
   
   override func didMove(to view: SKView) {
     super.didMove(to: view)
@@ -62,11 +61,22 @@ final class LevelOne: BaseLevel {
     (bodyA.categoryBitMask == CategoryBitmask.player && bodyB.categoryBitMask == CategoryBitmask.enemy) ||
     (bodyA.categoryBitMask == CategoryBitmask.enemy && bodyB.categoryBitMask == CategoryBitmask.player)
     
+    let takeCat =
+    (bodyA.categoryBitMask == CategoryBitmask.player && bodyB.categoryBitMask == CategoryBitmask.cat) ||
+    (bodyA.categoryBitMask == CategoryBitmask.cat && bodyB.categoryBitMask == CategoryBitmask.player)
+    
     if collision {
       hittedByEnemy()
     }
+    
+    if takeCat {
+      let catNode = (bodyA.categoryBitMask == CategoryBitmask.cat) ? bodyA.node : bodyB.node
+
+      zombie.takenCatsCount += 1
+      catNode?.removeFromParent()
+    }
   }
-  
+    
   func setupZombie() {
     zombie.position = CGPoint(x: 400, y: UIScreen.main.bounds.height / 2)
     addChild(zombie)
