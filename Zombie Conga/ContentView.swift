@@ -36,6 +36,8 @@ final class LevelOne: BaseLevel {
   
   override func didMove(to view: SKView) {
     super.didMove(to: view)
+    
+    setUpScoreLabel(camera: cameraNode)
     setupZombie()
     setupCamera()
     setupEnemy()
@@ -73,6 +75,8 @@ final class LevelOne: BaseLevel {
       let catNode = (bodyA.categoryBitMask == CategoryBitmask.cat) ? bodyA.node : bodyB.node
 
       zombie.takenCatsCount += 1
+      showScoreLabel(score: zombie.takenCatsCount)
+      
       catNode?.removeFromParent()
     }
   }
