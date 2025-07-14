@@ -14,6 +14,8 @@ final class GameManager {
       return MainMenu()
     case 1:
       return SKScene(fileNamed: "LevelOneScene") ?? MainMenu()
+    case 2:
+      return LoseScene()
     default:
       return MainMenu()
     }

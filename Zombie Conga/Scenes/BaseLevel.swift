@@ -63,7 +63,8 @@ class BaseLevel: SKScene, SKPhysicsContactDelegate {
       }
 
       if lives == 0 {
-        view?.presentScene(MainMenu(), transition: .crossFade(withDuration: 0.5))
+        let level = GameManager.loadLevel(lvl: 2)
+        view?.presentScene(level, transition: .crossFade(withDuration: 0.5))
       }
   }
 }
