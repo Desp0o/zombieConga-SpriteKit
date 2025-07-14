@@ -157,6 +157,7 @@ final class LevelOne: BaseLevel {
     let finishLineX = size.width * 3 - 200
     
     if zombie.position.x >= finishLineX {
+      audioPlayer?.stop()
       let level = GameManager.loadLevel(lvl: 3)
       level.size = size
       view?.presentScene(level, transition: .crossFade(withDuration: 0.5))
