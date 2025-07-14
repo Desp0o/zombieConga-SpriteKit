@@ -52,9 +52,9 @@ Your goal is to reach the end of the level without losing all your lives. Each c
 <img width="400" alt="ipad4" src="https://github.com/user-attachments/assets/22e6f1b7-f57f-46cd-bfda-1d2a60dcf55b" />
 
 ## 🎥 Demo Video 
-[Demo on iOS](https://youtu.be/vE1IFdPWoXU)           
+- [Demo on iOS](https://youtu.be/vE1IFdPWoXU)           
 
-[Demo on iPad](https://youtu.be/9UjK9f2m0-4)
+- [Demo on iPad](https://youtu.be/9UjK9f2m0-4)
 
 ## 🎨 Assets Credits
 
