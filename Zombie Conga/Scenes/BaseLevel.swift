@@ -64,6 +64,7 @@ class BaseLevel: SKScene, SKPhysicsContactDelegate {
 
       if lives == 0 {
         let level = GameManager.loadLevel(lvl: 2)
+        level.size = size
         view?.presentScene(level, transition: .crossFade(withDuration: 0.5))
       }
   }
