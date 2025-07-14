@@ -19,6 +19,15 @@ final class LevelOne: BaseLevel {
   override func didMove(to view: SKView) {
     super.didMove(to: view)
     
+    for i in 1...4 {
+            if let bg = childNode(withName: "bg\(i)") as? SKSpriteNode {
+                bg.size = self.size
+                bg.position = CGPoint(x: size.width * CGFloat(i - 1) + size.width / 2,
+                                      y: size.height / 2)
+                bg.zPosition = -1
+            }
+        }
+    
     playBackgroundMusic()
     setUpScoreLabel(camera: cameraNode)
     setupHearts(camera: cameraNode)

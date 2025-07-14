@@ -8,6 +8,8 @@
 import SpriteKit
 
 final class Cat: SKSpriteNode {
+  let screenMax = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+
   init() {
     let texture = SKTexture(imageNamed: "cat")
     super.init(texture: texture, color: .clear, size: texture.size())
@@ -32,7 +34,7 @@ final class Cat: SKSpriteNode {
     self.physicsBody?.contactTestBitMask = CategoryBitmask.player
     self.setScale(0)
     
-    let scaleUp = SKAction.scale(to: 0.3, duration: 0.3)
+    let scaleUp = SKAction.scale(to: screenMax >= 1024 ? 0.5 : 0.3, duration: 0.3)
     scaleUp.timingMode = .easeOut
     self.run(scaleUp)
     

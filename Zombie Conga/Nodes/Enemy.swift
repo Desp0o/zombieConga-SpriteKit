@@ -8,14 +8,19 @@
 import SpriteKit
 
 final class Enemy: SKSpriteNode {
-  
+  let screenMax = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
+
   init() {
     let texture = SKTexture(imageNamed: "enemy")
     super.init(texture: texture, color: .clear, size: texture.size())
     
     self.name = "enemy"
     self.position = CGPoint(x: size.width / 2, y: size.height / 2)
-    self.setScale(0.3)
+    if screenMax >= 1024 {
+      self.setScale(0.5)
+    } else {
+      self.setScale(0.3)
+    }
     self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
     self.physicsBody?.isDynamic = true
     self.physicsBody?.affectedByGravity = false

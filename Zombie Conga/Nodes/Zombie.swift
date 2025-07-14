@@ -8,6 +8,7 @@
 import SpriteKit
 
 class Zombie: SKSpriteNode {
+  let screenMax = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height)
   var takenCatsCount: Int = 0
   
   let walkTextures: [SKTexture] = [
@@ -20,7 +21,11 @@ class Zombie: SKSpriteNode {
   init() {
     let texture = SKTexture(imageNamed: "zombie1")
     super.init(texture: texture, color: .clear, size: texture.size())
-    self.setScale(0.3)
+    if screenMax >= 1024 {
+      self.setScale(0.5)
+    } else {
+      self.setScale(0.3)
+    }
     self.name = "zombie"
     self.physicsBody = SKPhysicsBody(rectangleOf: self.frame.size)
     self.physicsBody?.isDynamic = true
