@@ -21,11 +21,8 @@ class Zombie: SKSpriteNode {
     let texture = SKTexture(imageNamed: "zombie1")
     super.init(texture: texture, color: .clear, size: texture.size())
     self.setScale(0.3)
-    let scaledSize = CGSize(width: self.frame.size.width * 1.2,
-                            height: self.frame.size.height * 1.2)
-    
     self.name = "zombie"
-    self.physicsBody = SKPhysicsBody(rectangleOf: scaledSize)
+    self.physicsBody = SKPhysicsBody(rectangleOf: self.frame.size)
     self.physicsBody?.isDynamic = true
     self.physicsBody?.affectedByGravity = false
     self.physicsBody?.usesPreciseCollisionDetection = true
