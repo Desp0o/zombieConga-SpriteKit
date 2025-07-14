@@ -16,15 +16,6 @@ class BaseLevel: SKScene, SKPhysicsContactDelegate {
     self.physicsWorld.contactDelegate = self
   }
   
-  func setupSettingsButton() {
-    let settingsButton = SKSpriteNode(imageNamed: "settingsButton")
-    settingsButton.name = "settingsButton"
-    settingsButton.size = CGSize(width: 40, height: 40)
-    settingsButton.position = CGPoint(x: size.width - 60, y: size.height - 40)
-    
-    addChild(settingsButton)
-  }
-  
   func setUpScoreLabel(camera: SKCameraNode) {
     scoreLabel.text = "0"
     scoreLabel.fontColor = .green

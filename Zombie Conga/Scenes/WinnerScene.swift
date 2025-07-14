@@ -6,11 +6,14 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 final class WinnerScene: BaseLevel {
+  var audioPlayer: AVAudioPlayer?
   
   override func didMove(to view: SKView) {
     setupBg()
+    setupBackgroundMusic()
     setupPlayAgainButton()
     setupMainMenuButton()
   }
@@ -61,5 +64,17 @@ final class WinnerScene: BaseLevel {
     button.zPosition = 2
     
     addChild(button)
+  }
+  
+  func setupBackgroundMusic() {
+    guard let url = Bundle.main.url(forResource: "win", withExtension: "wav") else { return }
+    
+    do {
+      audioPlayer = try AVAudioPlayer(contentsOf: url)
+      audioPlayer?.prepareToPlay()
+      audioPlayer?.play()
+    } catch {
+      print(error)
+    }
   }
 }

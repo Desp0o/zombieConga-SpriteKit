@@ -14,7 +14,6 @@ final class MainMenu: BaseLevel {
     
     setupBG()
     setupStartButton()
-    setupSettingsButton()
   }
   
   func setupBG() {
@@ -39,11 +38,6 @@ final class MainMenu: BaseLevel {
     guard let touch = touches.first else { return }
     let location = touch.location(in: self)
     let nodeTouch = atPoint(location)
-    
-    if nodeTouch.name == "settingsButton" {
-      let level = GameManager.loadLevel(lvl: 1)
-      view?.presentScene(level, transition: .crossFade(withDuration: 0.5))
-    }
     
     if nodeTouch.name == "playButton" {
       let level = GameManager.loadLevel(lvl: 1)
