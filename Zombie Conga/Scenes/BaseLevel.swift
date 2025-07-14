@@ -56,8 +56,6 @@ class BaseLevel: SKScene, SKPhysicsContactDelegate {
   }
   
   func loseLife() {
-    run(SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false))
-    
     lives -= 1
     
     if lives >= 0 && lives < hearts.count {

@@ -13,6 +13,8 @@ final class LevelOne: BaseLevel {
   let zombie: Zombie = Zombie()
   let enemy: Enemy = Enemy()
   var audioPlayer: AVAudioPlayer?
+  var audioPlayer2: AVAudioPlayer?
+  var audioPlayer3: AVAudioPlayer?
   
   override func didMove(to view: SKView) {
     super.didMove(to: view)
@@ -59,8 +61,7 @@ final class LevelOne: BaseLevel {
       
       zombie.takenCatsCount += 1
       showScoreLabel(score: zombie.takenCatsCount)
-      
-      run(SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false))
+      playCatSound()
       catNode?.removeFromParent()
     }
   }
@@ -123,6 +124,7 @@ final class LevelOne: BaseLevel {
     let blink = SKAction.sequence([fadeOut, fadeIn])
     let repeatBlinking = SKAction.repeat(blink, count: 6)
     
+    playDamageSound()
     zombie.run(SKAction.sequence([repeatBlinking, restore]))
     
     if zombie.takenCatsCount > 0 {
@@ -170,6 +172,32 @@ final class LevelOne: BaseLevel {
       audioPlayer?.volume = 0.7
       audioPlayer?.prepareToPlay()
       audioPlayer?.play()
+    } catch {
+      print(error)
+    }
+  }
+  
+  func playCatSound() {
+    guard let sactSound = Bundle.main.url(forResource: "hitCat", withExtension: "wav") else { return }
+    
+    do {
+      audioPlayer2 = try AVAudioPlayer(contentsOf: sactSound)
+      audioPlayer2?.volume = 0.7
+      audioPlayer2?.prepareToPlay()
+      audioPlayer2?.play()
+    } catch {
+      print(error)
+    }
+  }
+  
+  func playDamageSound() {
+    guard let sactSound = Bundle.main.url(forResource: "hitCatLady", withExtension: "wav") else { return }
+    
+    do {
+      audioPlayer2 = try AVAudioPlayer(contentsOf: sactSound)
+      audioPlayer2?.volume = 0.7
+      audioPlayer2?.prepareToPlay()
+      audioPlayer2?.play()
     } catch {
       print(error)
     }
