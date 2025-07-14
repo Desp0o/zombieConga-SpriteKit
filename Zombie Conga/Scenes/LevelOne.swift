@@ -32,6 +32,7 @@ final class LevelOne: BaseLevel {
   
   override func update(_ currentTime: TimeInterval) {
     updateCameraMovement()
+    checkFinishLine()
   }
   
   func didBegin(_ contact: SKPhysicsContact) {
@@ -52,14 +53,14 @@ final class LevelOne: BaseLevel {
     
     if takeCat {
       let catNode = (bodyA.categoryBitMask == CategoryBitmask.cat) ? bodyA.node : bodyB.node
-
+      
       zombie.takenCatsCount += 1
       showScoreLabel(score: zombie.takenCatsCount)
       
       catNode?.removeFromParent()
     }
   }
-    
+  
   func setupZombie() {
     zombie.position = CGPoint(x: 400, y: UIScreen.main.bounds.height / 2)
     addChild(zombie)
@@ -139,5 +140,15 @@ final class LevelOne: BaseLevel {
     let repeatForever = SKAction.repeatForever(SKAction.sequence([spawn, wait]))
     
     self.run(repeatForever)
+  }
+  
+  func checkFinishLine() {
+    let finishLineX = size.width * 3 - 200
+    
+    if zombie.position.x >= finishLineX {
+      let level = GameManager.loadLevel(lvl: 3)
+      level.size = size
+      view?.presentScene(level, transition: .crossFade(withDuration: 0.5))
+    }
   }
 }
