@@ -46,7 +46,7 @@ final class LoseScene: BaseLevel {
   func setupPlayAgainButton() {
     let button = SKSpriteNode(imageNamed: "playButton")
     button.name = "playButton"
-    button.size = CGSize(width: 50, height: 50)
+    button.size = CGSize(width: 60, height: 60)
     button.position = CGPoint(x: size.width / 2 - 35, y: 70)
     button.zPosition = 2
     
@@ -56,7 +56,7 @@ final class LoseScene: BaseLevel {
   func setupMainMenuButton() {
     let button = SKSpriteNode(imageNamed: "mainMenuButton")
     button.name = "mainMenuButton"
-    button.size = CGSize(width: 50, height: 50)
+    button.size = CGSize(width: 60, height: 60)
     button.position = CGPoint(x: size.width / 2 + 35, y: 70)
     button.zPosition = 2
     
