@@ -40,6 +40,31 @@ class BaseLevel: SKScene, SKPhysicsContactDelegate {
     scoreLabel.text = "\(score)"
   }
   
+  func setupHearts(camera: SKCameraNode) {
+    let posX = camera.position.x - size.width / 2 + 50
+    let posY = camera.position.y + size.height / 2 - 40
+    
+    for i in 0..<3 {
+      let heart = SKSpriteNode(imageNamed: "heart")
+      heart.size = CGSize(width: 50, height: 50)
+      heart.position = CGPoint(x: posX + CGFloat(i * 40), y: posY)
+      heart.setScale(0.5)
+      heart.zPosition = 100
+      camera.addChild(heart)
+      hearts.append(heart)
+    }
+  }
   
+  func loseLife() {
+      lives -= 1
+
+      if lives >= 0 && lives < hearts.count {
+          hearts[lives].isHidden = true
+      }
+
+      if lives == 0 {
+        view?.presentScene(MainMenu(), transition: .crossFade(withDuration: 0.5))
+      }
+  }
 }
 
