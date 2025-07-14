@@ -6,15 +6,18 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 final class LevelOne: BaseLevel {
   let cameraNode: SKCameraNode = SKCameraNode()
   let zombie: Zombie = Zombie()
   let enemy: Enemy = Enemy()
+  var audioPlayer: AVAudioPlayer?
   
   override func didMove(to view: SKView) {
     super.didMove(to: view)
     
+    playBackgroundMusic()
     setUpScoreLabel(camera: cameraNode)
     setupHearts(camera: cameraNode)
     setupZombie()
@@ -155,6 +158,20 @@ final class LevelOne: BaseLevel {
       let level = GameManager.loadLevel(lvl: 3)
       level.size = size
       view?.presentScene(level, transition: .crossFade(withDuration: 0.5))
+    }
+  }
+  
+  func playBackgroundMusic() {
+    guard let url = Bundle.main.url(forResource: "backgroundMusic", withExtension: "mp3") else { return }
+    
+    do {
+      audioPlayer = try AVAudioPlayer(contentsOf: url)
+      audioPlayer?.numberOfLoops = -1
+      audioPlayer?.volume = 0.7
+      audioPlayer?.prepareToPlay()
+      audioPlayer?.play()
+    } catch {
+      print(error)
     }
   }
 }
