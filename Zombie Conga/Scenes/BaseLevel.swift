@@ -9,11 +9,13 @@ import SpriteKit
 
 class BaseLevel: SKScene, SKPhysicsContactDelegate {
   let scoreLabel: SKLabelNode = SKLabelNode()
+  var hearts: [SKSpriteNode] = []
+  var lives: Int = 3
   
   override func didMove(to view: SKView) {
     self.physicsWorld.contactDelegate = self
   }
-
+  
   func setupSettingsButton() {
     let settingsButton = SKSpriteNode(imageNamed: "settingsButton")
     settingsButton.name = "settingsButton"
@@ -37,5 +39,7 @@ class BaseLevel: SKScene, SKPhysicsContactDelegate {
   func showScoreLabel(score: Int) {
     scoreLabel.text = "\(score)"
   }
+  
+  
 }
 
