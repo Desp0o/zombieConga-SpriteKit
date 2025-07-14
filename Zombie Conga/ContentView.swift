@@ -157,7 +157,7 @@ final class LevelOne: BaseLevel {
       self?.generateCats()
     }
     
-    let wait = SKAction.wait(forDuration: 4)
+    let wait = SKAction.wait(forDuration: 2)
     let repeatForever = SKAction.repeatForever(SKAction.sequence([spawn, wait]))
     
     self.run(repeatForever)
