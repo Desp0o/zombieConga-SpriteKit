@@ -44,7 +44,7 @@ Your goal is to reach the end of the level without losing all your lives. Each c
 <img height="200" alt="iOS4" src="https://github.com/user-attachments/assets/5a22e6b3-716d-4f30-b7e7-3f8f997bf58a" />
 <img height="200" alt="iOS5" src="https://github.com/user-attachments/assets/3c8007e4-b50c-489d-a9ca-5b5993b35101" />
 
- ### iPad
+ ### iPadOS
 <img width="400" alt="ipad1" src="https://github.com/user-attachments/assets/8944fb4b-76b3-442a-b7bd-f5624b584498" />
 <img width="400" alt="ipad1" src="https://github.com/user-attachments/assets/6d22ce44-81b8-4bf1-82a9-7aac003b062b" />
 <img width="400" alt="ipad2" src="https://github.com/user-attachments/assets/0bef8a8a-0bae-48c0-830c-05a6aea00aa4" />
@@ -54,7 +54,7 @@ Your goal is to reach the end of the level without losing all your lives. Each c
 ## 🎥 Demo Video 
 - [Demo on iOS](https://youtu.be/vE1IFdPWoXU)           
 
-- [Demo on iPad](https://youtu.be/9UjK9f2m0-4)
+- [Demo on iPadOS](https://youtu.be/9UjK9f2m0-4)
 
 ## 🎨 Assets Credits
 
