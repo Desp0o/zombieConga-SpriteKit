@@ -30,7 +30,11 @@ final class Cat: SKSpriteNode {
     self.physicsBody?.categoryBitMask = CategoryBitmask.cat
     self.physicsBody?.collisionBitMask = CategoryBitmask.player
     self.physicsBody?.contactTestBitMask = CategoryBitmask.player
-    self.setScale(0.3)
+    self.setScale(0)
+    
+    let scaleUp = SKAction.scale(to: 0.3, duration: 0.3)
+       scaleUp.timingMode = .easeOut
+       self.run(scaleUp)
   }
   
   func generateCatPosition(around sprite: SKSpriteNode, scene: SKScene) {
