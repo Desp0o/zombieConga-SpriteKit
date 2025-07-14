@@ -56,17 +56,19 @@ class BaseLevel: SKScene, SKPhysicsContactDelegate {
   }
   
   func loseLife() {
-      lives -= 1
-
-      if lives >= 0 && lives < hearts.count {
-          hearts[lives].isHidden = true
-      }
-
-      if lives == 0 {
-        let level = GameManager.loadLevel(lvl: 2)
-        level.size = size
-        view?.presentScene(level, transition: .crossFade(withDuration: 0.5))
-      }
+    run(SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false))
+    
+    lives -= 1
+    
+    if lives >= 0 && lives < hearts.count {
+      hearts[lives].isHidden = true
+    }
+    
+    if lives == 0 {
+      let level = GameManager.loadLevel(lvl: 2)
+      level.size = size
+      view?.presentScene(level, transition: .crossFade(withDuration: 0.5))
+    }
   }
 }
 

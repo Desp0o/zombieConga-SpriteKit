@@ -57,6 +57,7 @@ final class LevelOne: BaseLevel {
       zombie.takenCatsCount += 1
       showScoreLabel(score: zombie.takenCatsCount)
       
+      run(SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false))
       catNode?.removeFromParent()
     }
   }
@@ -120,6 +121,11 @@ final class LevelOne: BaseLevel {
     let repeatBlinking = SKAction.repeat(blink, count: 6)
     
     zombie.run(SKAction.sequence([repeatBlinking, restore]))
+    
+    if zombie.takenCatsCount > 0 {
+      zombie.takenCatsCount -= 1
+      showScoreLabel(score: zombie.takenCatsCount)
+    }
     
     loseLife()
   }
